@@ -1,13 +1,7 @@
 import { useState } from 'react';
-import { Mail, Send, Linkedin, Github, Instagram } from 'lucide-react';
+import { Mail, Send, Instagram } from 'lucide-react';
 
-interface ContactSectionProps {
-  language: 'en' | 'es' | 'ca';
-  translations: any;
-}
-
-const ContactSection = ({ translations }: ContactSectionProps) => {
-  const t = translations.contact;
+const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,8 +10,8 @@ const ContactSection = ({ translations }: ContactSectionProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission (can integrate with email service later)
-    const mailtoLink = `mailto:${t.email}?subject=Contact from ${formData.name}&body=${formData.message}`;
+    // Simple mailto for now - can be replaced with EmailJS later
+    const mailtoLink = `mailto:contact@aliz.com?subject=Message from ${formData.name}&body=${formData.message}`;
     window.location.href = mailtoLink;
   };
 
@@ -29,208 +23,131 @@ const ContactSection = ({ translations }: ContactSectionProps) => {
   };
 
   return (
-    <section id="contact" className="py-24 px-4 bg-zinc-950/50">
+    <section id="contact" className="py-24 px-6 bg-white">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            {t.title}
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="text-4xl md:text-5xl font-light text-[#2D2D2D]">
+            Let's Connect
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-6">
-            {t.subtitle}
+          <p className="text-lg text-[#5A5A5A] max-w-2xl mx-auto leading-relaxed">
+            Whether you're curious about Montessori education, seeking a space holder for your circle, or ready to explore medicine work, I'd love to hear from you.
           </p>
-          {t.description && (
-            <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-              {t.description}
-            </p>
-          )}
         </div>
-
-        {/* Best For Section */}
-        {t.bestFor && t.bestForItems && (
-          <div className="max-w-4xl mx-auto mb-16">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-2xl blur opacity-20 group-hover:opacity-30 transition"></div>
-              <div className="relative bg-gradient-to-br from-purple-900/20 to-cyan-900/20 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-                <h3 className="text-2xl font-bold text-white mb-6">{t.bestFor}</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {t.bestForItems.map((item: string, index: number) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400 mt-2 flex-shrink-0"></div>
-                      <span className="text-gray-300">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl blur opacity-20 group-hover:opacity-30 transition"></div>
-            <div className="relative bg-zinc-900/80 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name Input */}
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
-                    {t.form.name}
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                    placeholder={t.form.name}
-                  />
-                </div>
+          <div className="bg-[#FAFAF8] rounded-lg p-8 border border-stone-200">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name Input */}
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-[#5A5A5A] mb-2">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg text-[#2D2D2D] placeholder-stone-400 focus:outline-none focus:border-[#8B9A87] transition-colors"
+                  placeholder="Your name"
+                />
+              </div>
 
-                {/* Email Input */}
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
-                    {t.form.email}
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-                    placeholder={t.form.email}
-                  />
-                </div>
+              {/* Email Input */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-[#5A5A5A] mb-2">
+                  Your Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg text-[#2D2D2D] placeholder-stone-400 focus:outline-none focus:border-[#8B9A87] transition-colors"
+                  placeholder="your@email.com"
+                />
+              </div>
 
-                {/* Message Textarea */}
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
-                    {t.form.message}
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={6}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
-                    placeholder={t.form.message}
-                  />
-                </div>
+              {/* Message Textarea */}
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-[#5A5A5A] mb-2">
+                  Your Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={6}
+                  className="w-full px-4 py-3 bg-white border border-stone-300 rounded-lg text-[#2D2D2D] placeholder-stone-400 focus:outline-none focus:border-[#8B9A87] transition-colors resize-none"
+                  placeholder="Share what's calling you to connect..."
+                />
+              </div>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transform hover:scale-[1.02] transition-all"
-                >
-                  <span>{t.form.submit}</span>
-                  <Send className="w-5 h-5" />
-                </button>
-              </form>
-            </div>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-[#3D5A4C] text-white font-medium rounded-full hover:bg-[#2D4A3C] hover:shadow-lg transform hover:scale-[1.02] transition-all"
+              >
+                <span>Send Message</span>
+                <Send className="w-5 h-5" />
+              </button>
+            </form>
           </div>
 
-          {/* Contact Info & Social Links */}
+          {/* Contact Info */}
           <div className="space-y-8">
             {/* Email Card */}
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur opacity-20 group-hover:opacity-30 transition"></div>
-              <div className="relative bg-zinc-900/80 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500">
-                    <Mail className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white">Email</h3>
+            <div className="bg-[#F5F1E8] rounded-lg p-8 border border-stone-200">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 rounded-full bg-[#D4837C]">
+                  <Mail className="w-6 h-6 text-white" />
                 </div>
+                <h3 className="text-xl font-medium text-[#2D2D2D]">Email</h3>
+              </div>
+              <a
+                href="mailto:contact@aliz.com"
+                className="text-[#3D5A4C] hover:text-[#2D4A3C] transition-colors"
+              >
+                contact@aliz.com
+              </a>
+            </div>
+
+            {/* Social Links */}
+            <div className="bg-[#F5F1E8] rounded-lg p-8 border border-stone-200">
+              <h3 className="text-xl font-medium text-[#2D2D2D] mb-6">Connect</h3>
+              <div className="space-y-4">
+                {/* Instagram */}
                 <a
-                  href={`mailto:${t.email}`}
-                  className="text-cyan-400 hover:text-cyan-300 transition-colors"
+                  href="https://instagram.com/aliz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 bg-white rounded-lg border border-stone-200 hover:border-[#D4837C] transition-all group"
                 >
-                  {t.email}
+                  <div className="p-2 rounded-full bg-[#D4837C]">
+                    <Instagram className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-[#5A5A5A] group-hover:text-[#3D5A4C] transition-colors">
+                    Instagram
+                  </span>
                 </a>
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl blur opacity-20 group-hover:opacity-30 transition"></div>
-              <div className="relative bg-zinc-900/80 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
-                <h3 className="text-xl font-bold text-white mb-6">Social Links</h3>
-                <div className="space-y-4">
-                  {/* LinkedIn */}
-                  <a
-                    href={`https://${t.social.linkedin}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-cyan-500/50 transition-all group/link"
-                  >
-                    <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500">
-                      <Linkedin className="w-5 h-5 text-white" />
-                    </div>
-                    <span className="text-gray-300 group-hover/link:text-cyan-400 transition-colors">
-                      LinkedIn
-                    </span>
-                  </a>
-
-                  {/* GitHub */}
-                  <a
-                    href={`https://${t.social.github}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-purple-500/50 transition-all group/link"
-                  >
-                    <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500">
-                      <Github className="w-5 h-5 text-white" />
-                    </div>
-                    <span className="text-gray-300 group-hover/link:text-purple-400 transition-colors">
-                      GitHub
-                    </span>
-                  </a>
-
-                  {/* Instagram */}
-                  <a
-                    href={`https://${t.social.instagram}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-pink-500/50 transition-all group/link"
-                  >
-                    <div className="p-2 rounded-lg bg-gradient-to-r from-pink-500 to-purple-500">
-                      <Instagram className="w-5 h-5 text-white" />
-                    </div>
-                    <span className="text-gray-300 group-hover/link:text-pink-400 transition-colors">
-                      Instagram
-                    </span>
-                  </a>
-                </div>
-              </div>
+            {/* Note */}
+            <div className="text-center pt-8">
+              <p className="text-[#8B8B8B] italic leading-relaxed">
+                All inquiries are met with care and usually responded to within 48 hours.
+              </p>
             </div>
           </div>
         </div>
-
-        {/* Note & Other Work */}
-        {(t.note || t.otherWork) && (
-          <div className="max-w-4xl mx-auto mt-16 space-y-6">
-            {t.note && (
-              <div className="text-center">
-                <p className="text-gray-400 italic">
-                  {t.note}
-                </p>
-              </div>
-            )}
-            {t.otherWork && (
-              <div className="text-center">
-                <p className="text-sm text-gray-500">
-                  {t.otherWork}
-                </p>
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </section>
   );
